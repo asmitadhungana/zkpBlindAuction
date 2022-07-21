@@ -23,6 +23,19 @@ When you run tests you will see something like this:
 
 ![RunTestsImage](https://user-images.githubusercontent.com/52170174/172546375-432bb341-2d4a-4d8f-8ecb-eef7854f7486.png)
 
+## Deploy on [Local Hardhat Environment](https://explorer.pops.one/)
+
+Open up a new terminal tab and run a local hardhat node
+```bash
+npx hardhat node
+```
+
+In a different tab:
+
+```bash
+npx hardhat run scripts/deploy.js --network harmonyTestnet
+```
+
 ## Deploy on [Harmony Testnet](https://explorer.pops.one/)
 
 Create a `.env` file and add to it:

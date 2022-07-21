@@ -1,6 +1,6 @@
-# zkGames circom circuits
+# zkpBlindAuction circom circuit
 
-This folder contains the `sudoku.circom` [circuit](https://github.com/iden3/circom) used in the zkSudoku application.
+This folder contains the `higherBidder.circom` [circuit](https://github.com/iden3/circom) for the zkpBlindAuction application.
 
 ## Install dependencies
 
@@ -12,28 +12,30 @@ yarn install
 
 ## Compile circuits and generate and verify the zk-proof using [snarkjs](https://github.com/iden3/snarkjs)
 
-To know how is everything generated, you can see the `executeGroth16.sh` file inside the `sudoku` folder.
+To know how is everything generated, you can see the `executeGroth16.sh` file inside the `auction` folder.
 
-To compile and run the circuit, go inside the sudoku folder and run:
+To compile and run the circuit, go inside the auction folder and run:
 
-Run the first time:
-
-```bash
-chmod u+x executeGroth16.sh
-```
-
-And after that, you can always run:
+### Compile the circuit:
 
 ```bash
-./executeGroth16.sh
+$ chmod u+x compile.sh
+$ ./compile.sh
 ```
 
-## Run tests
-
+### Generate the witness
 ```bash
-yarn test
+$ chmod u+x generateWitness.sh
+$ ./generateWitness.sh
 ```
 
-When you run tests you will see something like this:
+### Generate the proof using Groth16
+```bash
+$ chmod u+x executeGroth16.sh
+$ ./executeGroth16.sh
+```
 
-![CircuitsTestsImage](https://user-images.githubusercontent.com/52170174/172546954-b90c6441-a63e-46a8-ad82-650475c2a35b.png)
+## Run circuit tests using circom_tester
+```bash
+$ yarn test
+```

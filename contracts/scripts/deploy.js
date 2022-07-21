@@ -1,13 +1,20 @@
 const main = async () => {
-  const SudokuVerifier = await hre.ethers.getContractFactory("SudokuVerifier");
-  const sudokuVerifier = await SudokuVerifier.deploy();
-  await sudokuVerifier.deployed();
-  console.log("SudokuVerifier Contract deployed to:", sudokuVerifier.address);
+  const HigherBidderVerifier = await hre.ethers.getContractFactory("Verifier");
+  const higherBidderVerifier = await HigherBidderVerifier.deploy();
+  await higherBidderVerifier.deployed();
+  console.log("HigherBidderVerifier Contract deployed to:", higherBidderVerifier.address);
 
-  const Sudoku = await hre.ethers.getContractFactory("Sudoku");
-  const sudoku = await Sudoku.deploy(sudokuVerifier.address);
-  await sudoku.deployed();
-  console.log("Sudoku Contract deployed to:", sudoku.address);
+  // Deploy ZKPBlindAuction
+  const blockNumber = await ethers.provider.getBlockNumber();
+  const block = await ethers.provider.getBlock(blockNumber);
+  startTime = block.timestamp;
+
+  [deployer, beneficiary, bidder1, bidder2] = await ethers.getSigners();
+
+  const ZKPBlindAuction = await hre.ethers.getContractFactory("ZKPBlindAuction");
+  const zkpBlindAuction = await ZKPBlindAuction.deploy(higherBidderVerifier.address, startTime, beneficiary.address);
+  await zkpBlindAuction.deployed();
+  console.log("ZKPBlindAuction Contract deployed to:", zkpBlindAuction.address);
 };
 
 const runMain = async () => {
